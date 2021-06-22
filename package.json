@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "matter-js": "^0.16.1",
-    "stats.js": "^0.17.0"
+    "budo": "^11.6.4",
+    "livereload-js": "^3.3.2",
+    "tone": "^14.7.77"
   }
 }

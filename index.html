@@ -3,22 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.15.0/matter.min.js"
-     integrity="sha512-zbys69L/QzU+IIRLUIMXpYidZQk85uqm1kc70CQltVQ+bRHhxPPyQEb3+xezs0gNP+L+HpR8lGFuc129yE+mBA==" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <script src="matter.js" type="text/javascript"></script> -->
-    <style src="\index.js"></style>
-    <title>Dwitter Story</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js" 
+    integrity="sha512-L6Z/YtIPQ7eU3BProP34WGU5yIRk7tNHk7vaC2dB1Vy1atz6wl9mCkTPPZ2Rn1qPr+vY2mZ9odZLdGYuaBk7dQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.26/Tone.js"></script>
     <style>
         body{
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
+          margin:0;
+          padding:0;
+          overflow: hidden; 
         }
     </style>
+    <title>Exam Project</title>
 </head>
 <body>
-    <script src="index.js"></script>
-</body>
+    <!-- <audio controls autoplay>
+    <source src="song.mp3" type="audio/mp3">
+    </audio> -->
+    <div id="music-controls">
+        <button onclick="playMusic()">Play Music</button>
+        <button onclick="stopMusic()">Stop Music</button>
+        <button onclick="pauseMusic()">Pause Music</button>
+    </div>
 
+    <div class="wrapper">
+        
+        <canvas id="canvas1"></canvas>
+        <canvas id="canvas2"></canvas>
+        <canvas id="canvas3"></canvas>
+        <canvas id="canvas4"></canvas>
+        <canvas id="canvas5"></canvas>
+    </div>
+    <script src="http://localhost:35729/livereload.js"></script>
+    <script src="./setup.js"></script>
+    <script src="character.js"></script>
+    <script src="particles.js"></script>
+    <script src="ripples.js"></script>
+    <script src="obstacles.js"></script>
+    <script src="utilities.js"></script>
+    <script>
+        const howler = new Howl({
+            src : ["song.mp3"],
+            autoplay: false,
+            loop: false,
+            volume: 0.125,
+            onend: () => {
+                console.log("Finished")
+            }
+        });
+
+        function playMusic() {
+            howler.play();
+        }
+
+        function stopMusic() {
+            howler.stop();
+        }
+
+        function pauseMusic() {
+            howler.pause();
+        }
+    </script>
+</body>
 </html>
