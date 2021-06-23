@@ -1,3 +1,13 @@
+/* const { Tone } = require("tone/build/esm/core/Tone");
+
+const synth = new Tone.Synth().toDestination(); */
+
+
+
+
+
+
+
 function animate() {
     ctx1.clearRect(0,0, canvas.width, canvas.height);
     ctx2.clearRect(0,0, canvas.width, canvas.height);
@@ -30,12 +40,41 @@ window.addEventListener('keydown', (event) => {
     if (keys["ArrowLeft"] || keys["ArrowUp"] || keys["ArrowRight"]  || keys["ArrowDown"]) {
         character.move();
         console.log('Sound should come out');
-        let synth = new Tone.Synth().toDestination();
-        synth.triggerAttackRelease("C4", "8n");
+        /* synth.triggerAttackRelease("C4", "8n");  */
        
     };
     
 });
+
+window.addEventListener('keydown', (event) => {
+    let synth = new Tone.Synth().toDestination();
+    const now = Tone.now();
+
+    
+    try{
+        if (event.key == 'ArrowLeft') {
+            synth.triggerAttackRelease(nodesArr[3][0] , nodesArr[3][1]);
+        }
+
+        if (event.key == 'ArrowRight') {
+            synth.triggerAttackRelease(nodesArr[2][0], nodesArr[2][1]);
+        }
+        
+        if (event.key == 'ArrowUp') {
+            synth.triggerAttackRelease(nodesArr[0][0], nodesArr[0][1]);
+        }
+        
+        if (event.key == 'ArrowDown') {
+            synth.triggerAttackRelease(nodesArr[1][0], nodesArr[1][1]);
+        }
+    }catch(ReferenceError) {
+        console.log(ReferenceError + ' Sound didnt play');
+    }
+    
+
+});
+
+
 
 window.addEventListener('keyup', (event) => {
     delete keys[event.key];
@@ -48,6 +87,47 @@ function scored() {
     character.x = canvas.width/2 - character.width/2;
     character.y = canvas.height - character.height - 40;
 }
+
+function getRandomNumber(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+
+let nodesArr = []
+
+const submitBottun = document.getElementById("submitButton");
+submitBottun.addEventListener('click', () => {
+    nodesArr = nodesToArray();
+})
+
+
+function nodesToArray() {
+    console.log("called")
+        let soundUp = document.getElementById("soundUp").value.split(" ");
+        let soundDown = document.getElementById("soundDown").value.split(" ");
+        let soundLeft = document.getElementById("soundLeft").value.split(" ");
+        let soundRight = document.getElementById("soundRight").value.split(" ");
+        
+        nodesArr.push(soundUp, soundDown, soundRight, soundLeft);
+    
+    console.log(nodesArr)
+
+    return nodesArr;
+}
+
+
+function getRandomSynth() {
+    let nodeNumber = getRandomNumber(1,7);
+    let nodeArr = ['A', 'B', 'C', 'D', 'F'];
+    let node = nodeArr[getRandomNumber(0, nodeArr.length)];
+
+    let nodeToGame = `${nodeNumber + node}` 
+    
+    return new String(`${nodeNumber + node}`);
+
+} 
 
 function handleScoreBoard() {
     ctx4.fillStyle = 'black';

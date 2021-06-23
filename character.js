@@ -1,3 +1,6 @@
+
+
+
 class Character {
     constructor() {
         this.spriteWidth =  250;

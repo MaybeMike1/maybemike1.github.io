@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js" 
     integrity="sha512-L6Z/YtIPQ7eU3BProP34WGU5yIRk7tNHk7vaC2dB1Vy1atz6wl9mCkTPPZ2Rn1qPr+vY2mZ9odZLdGYuaBk7dQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.26/Tone.js"></script>
@@ -22,13 +23,28 @@
     <source src="song.mp3" type="audio/mp3">
     </audio> -->
     <div id="music-controls">
-        <button onclick="playMusic()">Play Music</button>
-        <button onclick="stopMusic()">Stop Music</button>
-        <button onclick="pauseMusic()">Pause Music</button>
+        <div id = "music-buttons">
+            <button type="button" class="btn btn-primary" onclick="playMusic()">Play Music</button>
+            <button type="button" class="btn btn-secondary" onclick="pauseMusic()">Pause Music</button>
+            <button type="button" class="btn btn-danger" onclick="stopMusic()">Stop Music</button>
+        </div>
+        
+        <b>Configuration for sound on ingame movement</b>
+        <p>Welcome to Dogde Energy Balls</p>
+        <p>By configurating sounds you will be able to play the game with sound.</p>
+        <p>This format has to be e.g <b>E3 7n or D1 2</b> you can play around a bit.</p>
+        <p>Please enter your sounds:</p>
+        <div class="music-input">
+            <label>Sound ArrowUp<input id="soundUp" type="text" placeholder="Sound for ArrowUp"></label>
+            <label>Sound ArrowDown<input id="soundDown" type="text" placeholder="Sound for ArrowDown"></label>
+            <label>Sound ArrowRight<input id="soundRight" type="text" placeholder="Sound for ArrowRight"></label>
+            <label>Sound ArrowLeft<input id="soundLeft" type="text" placeholder="Sound for ArrowLeft"></label>
+            <br>
+            <button type="button" class="btn btn-success" id="submitButton">Submit Data</button>
+        </div>
     </div>
 
     <div class="wrapper">
-        
         <canvas id="canvas1"></canvas>
         <canvas id="canvas2"></canvas>
         <canvas id="canvas3"></canvas>

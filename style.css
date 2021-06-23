@@ -21,9 +21,28 @@ canvas {
     text-align: center;
     padding: 5px;
     margin-top: 30px;
-
+    border: 5px solid black;
+    width: 400px;
 }
 
 button {
     margin-left: 20px;
+}
+
+.music-input input {
+    justify-content: center;
+    display: flex;
+    
+}
+
+.music-input label {
+    
+}
+
+#music-buttons{ 
+    margin: 10px;  
+}
+
+#submitButton {
+    margin-top: 10px;
 }
