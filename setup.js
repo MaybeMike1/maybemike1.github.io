@@ -32,13 +32,14 @@ canvas.width = 600;
 
 
 
-//Global variables
+//Global Variables for game rules and variable counts
 const grid = 80;
 let keys = [];
 let score = 0;
 let collisionCount = 0;
 let frame = 0;
 let gameSpeed = 1;
+let isSafe = false;
 
 const particlesArray = [];
 const maxParticles = 300;
@@ -48,50 +49,23 @@ const logsArray = [];
 
 
 const background = new Image();
-background.src = 'background_lvl2.png';
+background.src = 'assets/background_2.png';
 
-/* const character = new Image();
-character.src = "248250.png" */
+const characterSprite = new Image();
+characterSprite.src = "assets/character.png";
 
 const grass = new Image();
-grass.src = 'grass.png';
+grass.src = 'assets/grass.png';
 
-const collistions = new Image();
-collistions.src = 'hit.png'
 
 const turtle = new Image();
-turtle.src = 'turtles.png'
+turtle.src = 'assets/turtles.png'
 
 const enemies = new Image();
-enemies.src = 'enemy.png';
+enemies.src = 'assets/enemy.png';
 
 const log = new Image();
-log.src = 'log.png';
-
-let numberOfCars = 1;
+log.src = 'assets/log.png';
 
 
-/* let playerX = canvas.width / 2;
-const playerY = canvas.height / 5;
-
-console.log(playerX)
-
-/* function drawBackground() {
-    ctx.beginPath();
-    ctx.rect(0,0, canvas.width, canvas.height);
-    ctx.fillStyle = "black";
-    ctx.fill();
-    ctx.stroke();
-}
-
-
-function drawWorld() {
-    
-}
-
-function drawPlayer() {
-    
-}
-
-drawBackground();
- */
+let numberOfEnemies = 1;

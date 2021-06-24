@@ -24,8 +24,8 @@ class Particle {
             this.radius -= 0.14;
         }  
     }
-    drawRipple() {
-        ctx1.strokeStyle= 'rgba(255,255,255, ' + this.opacity + ')';
+/*     drawRipple() {
+        ctx1.strokeStyle= 'rgba(155,155,155, ' + this.opacity + ')';
         ctx1.beginPath();
         ctx1.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx1.stroke();
@@ -34,50 +34,38 @@ class Particle {
     ripple() {
         if (this.radius < 50) {
             this.radius += 0.5;
-            this.x -= 0.05;
+            this.x -= 0.1;
             this.y -= 0.05;
         }
         if(this.opacity > 0) {
             this.opacity -= 0.005
         }
-    }
+    } */
 }
 
-function handleParticles() {
-    for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
-        particlesArray[i].draw();
-    }
-    if (particlesArray.length > maxParticles) {
-        for (let i = 0; i < 30; i++) {
-            particlesArray.pop();
-        }
-    }
-    
+function handleParticles() { 
     if (((keys["ArrowLeft"] || keys["ArrowUp"] || keys["ArrowRight"]  || keys["ArrowDown"])) && character.y > 250 && particlesArray.length < maxParticles + 10) {
-        console.log('Particles should show!')
         for (let i = 0; i < 10; i++) {
             
             particlesArray.unshift(new Particle(character.x, character.y));
         }
     }
-    for (let i = 0; i < ripplesArray.length; i++) {
-        ripplesArray[i].update();
-        ripplesArray[i].draw();
+    for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
     }
-    if (ripplesArray.length > 20) {
+    if (particlesArray.length > 20) {
         for (let i = 0; i < 30; i++) {
-            ripplesArray.pop();
+            particlesArray.pop();
         }
     }
 
     if((keys["ArrowLeft"] || keys["ArrowUp"] || keys["ArrowRight"]  || keys["ArrowDown"])) {
         for (let i = 0; i < 20; i++) {
-            ripplesArray.unshift(new Ripple(character.x, character.y)); 
+            particlesArray.unshift(new Ripple(character.x, character.y)); 
         }
         for(let i = 0; i < enemiesArray.length; i++) {
             if (collistion(character,enemiesArray[i])) {
-                /* ctx4.drawImage(collistions, 0, 100, 100, character.x, character.y, 50,50);  */
                 resetGame();
             }
         }

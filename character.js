@@ -1,6 +1,3 @@
-
-
-
 class Character {
     constructor() {
         this.spriteWidth =  250;
@@ -10,16 +7,13 @@ class Character {
         this.x = canvas.width/2 - this.width/2
         this.y = canvas.height - this.height - 40;
         this.moving = false;
-        this.frameX = 0;
-        this.frameY = 0;
     }
 
     update() {
-        /* console.log('update') */
         if (keys["ArrowUp"]) {
+            ctx1.drawImage(characterSprite, 95 ,490, grid - 17, grid -19, this.x + 1, this.y , this.width + 12, this.height + 1);
             if (this.moving === false) {
                 this.y -= grid;
-                /* synth.triggerAttackRelease("C4", "8n"); */
                 this.moving = true;
             }
         }
@@ -30,12 +24,14 @@ class Character {
             }
         }
         if (keys["ArrowLeft"]) {
+            ctx1.drawImage(characterSprite, 815, 170, grid-17, grid -19, this.x + 1, this.y , this.width + 12, this.height + 1);
             if (this.moving === false && this.x > this.width) {
                 this.x -= grid;
                 this.moving = true;
             }
         }
         if (keys["ArrowRight"]) {
+            ctx1.drawImage(characterSprite, 15, 732, grid-17, grid -19, this.x + 1, this.y , this.width + 15, this.height + 1);
             if (this.moving === false && this.x < canvas.width - this.width * 2) {
                 this.x += grid;
                 this.moving = true;
@@ -49,13 +45,12 @@ class Character {
     
     draw() {
         ctx1.fillStyle = 'green';
-        ctx1.fillRect(this.x, this.y, this.width, this.height);
-        /* ctx1.drawImage(character, this.x, this.y, this.width, this.height); */
+        //Rest frame for character
+        ctx1.drawImage(characterSprite, 15,491, grid-17, grid -19, this.x + 1, this.y , this.width + 12, this.height + 1);
     }
 
     move() {
-        console.log('Moved')
-        console.log("Tone.now()")
+        console.log(`Character has moved to coordinate {x: ${character.x}, y: ${character.y}}`);
     }
 }
 

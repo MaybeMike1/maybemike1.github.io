@@ -9,7 +9,6 @@ class Obstacle {
         this.frameX = 0;
         this.frameY = 0;
         this.randomise = Math.floor(Math.random() * 30 + 30);
-        this.carType = (Math.floor(Math.random() * numberOfCars))
     }
     draw() {
         if(this.type === 'turtle') {
@@ -22,7 +21,7 @@ class Obstacle {
             ctx1.drawImage(log, this.x, this.y, this.width, this.height);
         } else {
             /* ctx1.fillRect(this.x, this.y,this.width,this.height); */
-            ctx1.drawImage(enemies, 351,550, grid-17, grid -19, this.x-3, this.y - 6, this.width, this.height);
+            ctx2.drawImage(enemies, 351,550, grid-17, grid -19, this.x-3, this.y - 6, this.width, this.height);
         }
         /* ctx1.fillRect(this.x, this.y, this.width, this.height); */
     }
@@ -79,5 +78,29 @@ function handleObstacles() {
         logsArray[i].update();
         logsArray[i].draw();
     }
-    for(let i = 0; i < enemiesArray.length; i++) {} 
+    for(let i = 0; i < enemiesArray.length; i++) {
+        if(collistion(character, enemiesArray[i])) {
+            console.log('Hit');
+            resetGame();
+        }
+    }
+
+    if(character.y < 250 && character.y > 100) {
+        isSafe = false;
+
+        for (let i = 0; i < logsArray.length; i++) {
+            if (collistion(character, logsArray[i])) {
+                character.x += logsArray[i].speed;
+                isSafe = true;
+            }
+        }
+
+        if (!isSafe) {
+            for (let i = 0; i < 30; i++) {
+                ripplesArray.unshift(new Ripple(character.x, character.y));
+            }
+            resetGame();
+        }
+    } 
+
 }

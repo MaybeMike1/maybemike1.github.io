@@ -9,11 +9,11 @@ class Ripple{
     }
     
     draw() {
-        ctx3.fillStyle = 'rgba(150, 150, 150,' + this.opacity + ')';
-        ctx3.beginPath();
-        ctx3.arc(this.x, this.y, this.radius, 0, Math.PI * 4);
-        ctx3.fill();
-        ctx3.closePath();
+        ctx1.fillStyle = 'rgba(150, 150, 150,' + this.opacity + ')';
+        ctx1.beginPath();
+        ctx1.arc(this.x, this.y, this.radius, 0, Math.PI * 4);
+        ctx1.fill();
+        ctx1.closePath();
     }
     update() {
         this.x += this.directionX;
@@ -24,6 +24,17 @@ class Ripple{
         if (this.radius > 0.15) {
             this.radius -= 0.14;
         } 
+    }
+    ripple() {
+        if(this.radius < 50) {
+            this.radius += 0.5;
+            this.x -= 0.1;
+            this.y -= 0.1;
+        }
+
+        if (this.opacity > 0) {
+            this
+        }
     }
 }
 
@@ -38,10 +49,9 @@ function handleRipples() {
         }
     }
 
-    if (((keys["ArrowLeft"] || keys["ArrowUp"] || keys["ArrowRight"]  || keys["ArrowDown"])) && character.y <= 190 && ripplesArray.length < 30 + 10) {
-        console.log('Ripples should show!')
+    if (((keys["ArrowLeft"] || keys["ArrowUp"] || keys["ArrowRight"]  || keys["ArrowDown"])) && character.y > 190 && ripplesArray.length < 30 + 10) {
         for (let i = 0; i < 10; i++) {
-            
+
             ripplesArray.unshift(new Ripple(character.x, character.y));
         }
     }
