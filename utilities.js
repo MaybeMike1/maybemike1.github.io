@@ -4,17 +4,15 @@ function animate() {
     ctx3.clearRect(0,0, canvas.width, canvas.height);
     ctx4.clearRect(0,0, canvas.width, canvas.height);
     ctx5.drawImage(background,0,0,canvas.width, canvas.height);
-    
+
+// Character animation happens here 
     handleScoreBoard();
     handleObstacles();
     character.draw();
     character.update();
     handleParticles();
     handleRipples();
-    
-    
-    
-    
+
     ctx4.drawImage(grass,0,0,canvas.width, canvas.height);
     frame++;
     requestAnimationFrame(animate);
@@ -56,8 +54,6 @@ window.addEventListener('keydown', (event) => {
     }catch(ReferenceError) {
         console.log('Sound couldnt play due to missing values in sound config');
     }
-    
-
 });
 
 
@@ -68,9 +64,22 @@ window.addEventListener('keyup', (event) => {
 });
 
 function scored() {
-    score++;
+    const oscScore = new Tone.Oscillator().toDestination();
+    if (level < 10) {
+        oscScore.frequency.value = "C3";
+        oscScore.frequency.rampTo("C1", 1);
+        oscScore.start().stop("+1");
+    }
+
+    if (level >= 10) {
+        oscScore.frequency.value = "F3";
+        oscScore.frequency.rampTo("F1", 1);
+        oscScore.start().stop("+1");
+    } 
+    
+    level++;
     gameSpeed += 0.05;
-    character.x = canvas.width/2 - character.width/2;
+    character.x = canvas.width/2 - character.width / 2;
     character.y = canvas.height - character.height - 40;
 }
 
@@ -83,8 +92,8 @@ function getRandomNumber(min, max) {
 
 let nodesArr = []
 
-const submitBottun = document.getElementById("submitButton");
-submitBottun.addEventListener('click', () => {
+const submitButton = document.getElementById("submitButton");
+submitButton.addEventListener('click', () => {
     nodesArr = nodesToArray();
 })
 
@@ -95,7 +104,7 @@ function nodesToArray() {
         let soundLeft = document.getElementById("soundLeft").value.split(" ");
         let soundRight = document.getElementById("soundRight").value.split(" ");
         
-        nodesArr.push(soundUp, soundDown, soundRight, soundLeft);
+        nodesArr.unshift(soundUp, soundDown, soundRight, soundLeft);
     
     console.log(nodesArr)
 
@@ -106,17 +115,15 @@ function nodesToArray() {
 
 function handleScoreBoard() {
     ctx4.fillStyle = 'black';
-    ctx4.font= '15px Verdana';
-    ctx4.strokeText('Level', 265,15);
-    ctx4.font = '60px Verdana';
-    ctx4.fillText(score + 1, 270, 65);
+    ctx4.font= '20px Verdana';
+    ctx4.strokeText('Level:' + level, 525,190);
     ctx4.font = '15px Verdana';
-    ctx4.strokeText('Collisions: ' + collisionCount, 10,175)
+    ctx4.strokeText('Retry Attempts ' + collisionCount, 10,175)
     ctx4.strokeText('Game Speed: ' + gameSpeed.toFixed(1), 10,195);
 }
 
-//Character is first and obstacles on road is second
-function collistion(first, second) {
+//Character is first and obstacles on road and river are second
+function collision(first, second) {
     return  !(  first.x > second.x + second.width ||
                 first.x + first.width < second.x ||
                 first.y > second.y + second.height ||
@@ -126,16 +133,26 @@ function collistion(first, second) {
 function playDeathSound() {
     const synth = new Tone.PolySynth(Tone.Synth).toDestination();
     const now = Tone.now();
-    synth.triggerAttackRelease('A1', '8n');
-    synth.triggerAttackRelease('C3', '8n');
-    synth.triggerAttackRelease('F2', '8n')
+    if (collisionCount < 10) {
+        synth.triggerAttackRelease('F2', '8n', now);
+        synth.triggerAttackRelease('D3', '8n', now + 0.5);
+        synth.triggerAttackRelease('E2', '8n', now + 1);
+        synth.triggerAttackRelease('C4', '8n', now + 1.5);
+    }
+    if (collisionCount > 10) {
+        synth.triggerAttackRelease('A1', '8n', now);
+        synth.triggerAttackRelease('C3', '8n', now + 0.5);
+        synth.triggerAttackRelease('F2', '8n', now + 1);
+        synth.triggerAttackRelease('C2', '8n')
+    }
+    
 }
 
 function resetGame() {
     playDeathSound();
-    character.x = canvas.width/2 - character.width/2;
+    character.x = canvas.width/2 - character.width / 2;
     character.y = canvas.height - character.height - 40;
-    score = 0;
+    level = 1;
     collisionCount++;
     gameSpeed = 1; 
 }

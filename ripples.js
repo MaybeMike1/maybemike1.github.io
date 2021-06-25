@@ -25,17 +25,6 @@ class Ripple{
             this.radius -= 0.14;
         } 
     }
-    ripple() {
-        if(this.radius < 50) {
-            this.radius += 0.5;
-            this.x -= 0.1;
-            this.y -= 0.1;
-        }
-
-        if (this.opacity > 0) {
-            this
-        }
-    }
 }
 
 function handleRipples() {    

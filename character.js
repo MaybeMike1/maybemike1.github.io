@@ -44,9 +44,14 @@ class Character {
     }
     
     draw() {
-        ctx1.fillStyle = 'green';
+        ctx1.fillStyle = "green";
         //Rest frame for character
         ctx1.drawImage(characterSprite, 15,491, grid-17, grid -19, this.x + 1, this.y , this.width + 12, this.height + 1);
+
+        if (keys["ArrowRight"] && character.moving === false) {
+            console.log("Called")
+            ctx1.drawImage(characterSprite, 15, 732, grid-17, grid -19, this.x + 1, this.y , this.width + 15, this.height + 1);
+        }
     }
 
     move() {

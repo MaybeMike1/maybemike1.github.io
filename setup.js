@@ -35,7 +35,7 @@ canvas.width = 600;
 //Global Variables for game rules and variable counts
 const grid = 80;
 let keys = [];
-let score = 0;
+let level = 1;
 let collisionCount = 0;
 let frame = 0;
 let gameSpeed = 1;
@@ -49,23 +49,23 @@ const logsArray = [];
 
 
 const background = new Image();
-background.src = 'assets/background_2.png';
+background.src = "assets/background_2.png";
 
 const characterSprite = new Image();
 characterSprite.src = "assets/character.png";
 
 const grass = new Image();
-grass.src = 'assets/grass.png';
+grass.src = "assets/grass.png";
 
 
 const turtle = new Image();
-turtle.src = 'assets/turtles.png'
+turtle.src = "assets/turtles.png"
 
 const enemies = new Image();
-enemies.src = 'assets/enemy.png';
+enemies.src = "assets/enemy.png";
 
 const log = new Image();
-log.src = 'assets/log.png';
+log.src = "assets/log.png";
 
 
 let numberOfEnemies = 1;
